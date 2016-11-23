@@ -36,8 +36,7 @@ mergedDataFiltered <- mergedData[stdMeanCols]
 ```
 　
 #Combine test and train activity IDs
-```R
-#Get train and test activity IDs corresponds to measure values
+```R#Get train and test activity IDs corresponds to measure values
 　
 dataFile = paste(dataDir,'test/y_test.txt',sep = "")
 testActivityIds <- read.csv(dataFile, sep = "", header = FALSE)
@@ -77,5 +76,5 @@ dataWithActivityPerson <- cbind( combinedPid, idMappedNames, mergedDataFiltered)
 names(dataWithActivityPerson)[1:2] <- c("PersonId", "ActivityMode")
 　
 groupedData <-group_by(dataWithActivityPerson, PersonId, ActivityMode)
-summerizedData <-summarise_each(y,funs(mean)
+summerizedData <-summarise_each(groupedData,funs(mean)
 ```
