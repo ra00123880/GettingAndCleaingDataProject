@@ -3,7 +3,7 @@ library(dplyr)
 　
 dataDir ='UCI HAR Dataset/'
 　
-#---Merges the training and the test sets to create one data set.
+#Merges the training and the test sets to create one data set.
 #get test data
 dataFile = paste(dataDir,'test/X_test.txt',sep = "")
 testData <- read.csv(dataFile, sep = "", header = FALSE)
@@ -16,7 +16,7 @@ trainData <- read.csv(dataFile, sep = "", header = FALSE)
 mergedData <- rbind(testData, trainData)
 　
 　
-#---Appropriately labels the data set with descriptive variable names.
+#Appropriately labels the data set with descriptive variable names.
 dataFile = paste(dataDir,'features.txt',sep = "")
 featureData <- read.csv(dataFile, sep = "", header = FALSE)
 　
@@ -27,7 +27,7 @@ names(mergedData) <- measureNames[,1]
 　
 # The merged data has now descriptive lables
 　
-#---Extracts only the measurements on the mean and standard deviation for each measurement.
+#Extracts only the measurements on the mean and standard deviation for each measurement.
 #select the columns containing std or mean
 stdMeanCols = grepl("std|mean", names(mergedData), ignore.case = TRUE)
 　
@@ -75,4 +75,5 @@ names(dataWithActivityPerson)[1:2] <- c("PersonId", "ActivityMode")
 groupedData <-group_by(dataWithActivityPerson, PersonId, ActivityMode)
 summerizedData <-summarise_each(y,funs(mean))
 　
-
+# write tidy data to csv file
+write.csv(summerizedData,'tidydata.csv')
