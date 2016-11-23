@@ -73,7 +73,7 @@ names(dataWithActivityPerson)[1:2] <- c("PersonId", "ActivityMode")
 　
 # group the data using PersonId and ActivityMode and summerize each column
 groupedData <-group_by(dataWithActivityPerson, PersonId, ActivityMode)
-summerizedData <-summarise_each(y,funs(mean))
+summerizedData <-summarise_each(groupedData ,funs(mean))
 　
 # write tidy data to csv file
-write.csv(summerizedData,'tidydata.csv')
+write.csv(summerizedData,'tidydata.csv', row.name = FALSE)
